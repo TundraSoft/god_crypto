@@ -26,7 +26,7 @@ export async function hmac(
     ? new TextEncoder().encode(key)
     : key;
 
-  const importedKey = await window.crypto.subtle.importKey(
+  const importedKey = await crypto.subtle.importKey(
     "raw", // raw format of the key - should be Uint8Array
     computedKey,
     { // algorithm details
@@ -37,7 +37,7 @@ export async function hmac(
     ["sign", "verify"], // what this key can do
   );
 
-  const output = await window.crypto.subtle.sign(
+  const output = await crypto.subtle.sign(
     "HMAC",
     importedKey,
     computedData,
